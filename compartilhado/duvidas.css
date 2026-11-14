@@ -1,0 +1,52 @@
+.duvidas-grade {
+    grid-template-columns: minmax(0, 0.8fr) minmax(0, 1.2fr);
+    align-items: start;
+}
+.acordeao {
+    border-top: 1px solid var(--linha);
+}
+.acordeao-item {
+    border-bottom: 1px solid var(--linha);
+}
+.acordeao-botao {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+    width: 100%;
+    min-height: 54px;
+    padding: 0.7rem 0.1rem;
+    border: 0;
+    background: transparent;
+    color: var(--verde);
+    font-family: inherit;
+    font-size: 0.95rem;
+    font-weight: 700;
+    line-height: 1.4;
+    text-align: left;
+}
+.acordeao-botao span {
+    font-size: 1.2rem;
+    line-height: 1;
+}
+.acordeao-botao:hover {
+    color: #805023;
+}
+.acordeao-painel {
+    display: grid;
+    grid-template-rows: 0fr;
+    transition: grid-template-rows 0.25s ease;
+}
+.acordeao-painel.aberto,
+.acordeao-item.aberto .acordeao-painel {
+    grid-template-rows: 1fr;
+}
+.acordeao-painel > div {
+    overflow: hidden;
+    min-height: 0;
+}
+.acordeao-painel p {
+    margin: 0 1.3rem 0.9rem 0.1rem;
+    color: var(--texto);
+    font-size: 0.92rem;
+}

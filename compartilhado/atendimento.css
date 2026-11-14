@@ -1,0 +1,127 @@
+.secao-espaco,
+.secao-duvidas {
+    background: #edf1eb;
+}
+.espaco-grade,
+.reserva-grade,
+.duvidas-grade {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+    align-items: center;
+    gap: 2rem;
+}
+.espaco-imagem {
+    width: 100%;
+    aspect-ratio: 3 / 2;
+    object-fit: cover;
+    border-radius: 0.4rem;
+}
+.abas {
+    margin-top: 1.5rem;
+}
+.abas-lista {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 0.2rem 0.9rem;
+    border-bottom: 1px solid #aeb6a5;
+}
+.abas-botao {
+    min-height: 43px;
+    padding: 0.4rem 0.05rem;
+    color: var(--texto);
+    border: 0;
+    border-bottom: 2px solid transparent;
+    background: transparent;
+    font-size: 0.85rem;
+    font-weight: 600;
+    text-align: left;
+}
+.abas-botao:hover,
+.abas-botao.ativo {
+    color: var(--verde);
+}
+.abas-botao.ativo {
+    border-bottom-color: var(--verde);
+}
+.abas-painel {
+    padding: 0.85rem 0 0;
+    color: var(--texto);
+    min-height: 5rem;
+    font-size: 0.92rem;
+}
+
+.reserva-grade {
+    grid-template-columns: minmax(0, 0.9fr) minmax(0, 1.1fr);
+}
+.progresso {
+    max-width: 27rem;
+    margin-top: 1.55rem;
+}
+.progresso > p,
+.progresso-legenda {
+    display: flex;
+    justify-content: space-between;
+    gap: 0.8rem;
+    margin-bottom: 0.5rem;
+    font-size: 0.84rem;
+}
+.progresso-trilho {
+    overflow: hidden;
+    height: 0.55rem;
+    border-radius: 1rem;
+    background: #dce1d3;
+}
+.progresso-barra {
+    height: 100%;
+    border-radius: inherit;
+    background: var(--musgo);
+    transition: width 0.25s ease;
+}
+
+.formulario {
+    padding: clamp(1.1rem, 3vw, 1.85rem);
+    border: 1px solid var(--linha);
+    border-radius: 0.4rem;
+    background: var(--papel);
+}
+.formulario-campos {
+    display: grid;
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    gap: 1rem;
+    margin-bottom: 1.25rem;
+}
+.formulario label {
+    display: block;
+    min-width: 0;
+    font-size: 0.86rem;
+    font-weight: 700;
+}
+.formulario input,
+.formulario select {
+    display: block;
+    width: 100%;
+    min-width: 0;
+    min-height: 45px;
+    margin-top: 0.3rem;
+    padding: 0.5rem 0.65rem;
+    color: var(--verde);
+    border: 1px solid #a5a99a;
+    border-radius: 0.25rem;
+    background: #fffdf8;
+    font-weight: 400;
+}
+.campo-erro {
+    display: block;
+    margin-top: 0.3rem;
+    color: #71352b;
+    font-size: 0.78rem;
+    font-weight: 500;
+}
+.formulario [aria-invalid="true"] {
+    border-color: #71352b;
+}
+.nota {
+    margin-top: 0.7rem;
+    color: var(--texto);
+    font-size: 0.8rem;
+}

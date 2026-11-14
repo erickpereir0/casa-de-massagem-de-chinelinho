@@ -1,0 +1,11 @@
+.rodape {
+    padding-block: 1.25rem;
+    border-top: 1px solid var(--linha);
+}
+.rodape p,
+.rodape a {
+    font-size: 0.85rem;
+}
+.rodape a {
+    font-weight: 600;
+}

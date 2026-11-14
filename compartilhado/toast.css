@@ -1,0 +1,29 @@
+.toast {
+    position: fixed;
+    z-index: 3;
+    inset: auto max(1rem, env(safe-area-inset-right))
+        max(1rem, env(safe-area-inset-bottom)) auto;
+    display: flex;
+    align-items: center;
+    gap: 0.9rem;
+    max-width: min(27rem, calc(100% - 2rem));
+    padding: 0.65rem 0.65rem 0.65rem 1rem;
+    border: 1px solid #6a7e5f;
+    border-radius: 0.4rem;
+    background: var(--verde);
+    color: var(--papel);
+    box-shadow: 0 0.5rem 1.4rem #18271f3b;
+}
+.toast-erro {
+    background: #71352b;
+    border-color: #b67f70;
+}
+.toast button {
+    min-width: 36px;
+    min-height: 36px;
+    padding: 0.15rem 0.45rem;
+    border: 1px solid currentColor;
+    border-radius: 0.25rem;
+    color: inherit;
+    background: transparent;
+}

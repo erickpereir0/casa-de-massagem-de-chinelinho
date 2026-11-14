@@ -1,0 +1,155 @@
+<!doctype html>
+<html lang="pt-BR" ng-app="casaDeMassagem" ng-strict-di>
+  <head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <meta name="description" content="Conheça a Casa de Massagem De Chinelinho e simule sua reserva.">
+    <link rel="icon" type="image/svg+xml" href="/chinelinho.svg">
+    <title>De Chinelinho | Casa de Massagem</title>
+    <script type="module" src="./angularjs/app.js"></script>
+  </head>
+  <body ng-controller="PaginaController" ng-cloak>
+    <header id="inicio" class="cabecalho">
+      <div class="limite cabecalho-interno">
+        <a class="marca" href="#inicio">De Chinelinho</a>
+        <nav class="navegacao" aria-label="Navegação principal">
+          <a href="#massagens">Massagens</a>
+          <a href="#espaco">O espaço</a>
+          <a href="#duvidas">Dúvidas</a>
+        </nav>
+        <a class="botao botao-compacto" href="#reserva">Reservar</a>
+      </div>
+    </header>
+
+    <main>
+      <section class="hero" aria-labelledby="titulo-inicio">
+        <div class="limite hero-interno">
+          <h1 id="titulo-inicio">Casa de Massagem De Chinelinho</h1>
+          <p>Conheça nossas massagens e encontre um momento para relaxar.</p>
+          <a class="botao" href="#massagens">Ver massagens</a>
+        </div>
+      </section>
+
+      <section id="massagens" class="secao limite" aria-labelledby="titulo-massagens" ng-controller="CatalogoController">
+        <div class="cabeca-secao">
+          <div>
+            <h2 id="titulo-massagens">Nossas massagens</h2>
+            <p>Escolha o cuidado que combina com o seu momento.</p>
+          </div>
+          <dropdown-categoria itens="categorias" atual="catalogo.categoria"
+            ao-selecionar="escolherCategoria(categoria)"></dropdown-categoria>
+        </div>
+
+        <div class="catalogo">
+          <article class="cartao" ng-repeat="massagem in catalogo.itens track by massagem.id">
+            <img class="cartao-imagem" ng-src="{{ massagem.imagem }}" ng-attr-alt="{{ massagem.nome }}" loading="lazy">
+            <div class="cartao-corpo">
+              <div class="cartao-meta"><span>{{ massagem.categoria }}</span><span>{{ massagem.duracao }} min</span></div>
+              <h3>{{ massagem.nome }}</h3>
+              <p>{{ massagem.descricao }}</p>
+              <div class="cartao-rodape">
+                <strong>{{ massagem.preco | precoEmReais }}</strong>
+                <a class="cartao-acao" href="#reserva" ng-click="selecionarMassagem(massagem.id)"
+                  ng-attr-aria-label="Selecionar {{ massagem.nome }}">Selecionar</a>
+              </div>
+            </div>
+          </article>
+        </div>
+        <paginacao atual="catalogo.pagina" total="catalogo.totalPaginas"
+          ao-selecionar="escolherPagina(pagina)"></paginacao>
+      </section>
+
+      <section id="espaco" class="secao secao-espaco" aria-labelledby="titulo-espaco">
+        <div class="limite espaco-grade">
+          <img class="espaco-imagem" ng-src="{{ imagemEspaco }}"
+            alt="Banco de madeira e plantas na recepção da casa" loading="lazy">
+          <div>
+            <h2 id="titulo-espaco">Um espaço para desacelerar</h2>
+            <p>Luz suave, tecidos naturais e tempo para respirar. Conheça a casa antes de chegar.</p>
+            <abas itens="abas"></abas>
+          </div>
+        </div>
+      </section>
+
+      <section id="reserva" class="secao limite" aria-labelledby="titulo-reserva" ng-controller="ReservaController">
+        <div class="reserva-grade">
+          <div>
+            <h2 id="titulo-reserva">Reserve um tempo para você</h2>
+            <p>Experimente o formulário e veja como seria marcar sua sessão.</p>
+            <progresso valor="reserva.progresso"></progresso>
+          </div>
+
+          <form name="formulario" class="formulario" novalidate ng-submit="simularReserva(formulario)">
+            <div class="formulario-campos">
+              <label>
+                <span id="rotulo-nome">Nome</span>
+                <input type="text" name="nome" autocomplete="name"
+                  required minlength="2" ng-model="reserva.formulario.nome" ng-change="reserva.atualizarProgresso()"
+                  aria-labelledby="rotulo-nome" aria-describedby="erro-nome"
+                  ng-attr-aria-invalid="{{ formulario.$submitted && formulario.nome.$invalid }}">
+                <small class="campo-erro" id="erro-nome" ng-show="formulario.$submitted && formulario.nome.$invalid">
+                  Informe pelo menos 2 caracteres.
+                </small>
+              </label>
+              <label>
+                <span id="rotulo-massagem">Massagem</span>
+                <select name="massagem" required ng-model="reserva.formulario.massagem"
+                  ng-change="reserva.atualizarProgresso()"
+                  aria-labelledby="rotulo-massagem" aria-describedby="erro-massagem"
+                  ng-attr-aria-invalid="{{ formulario.$submitted && formulario.massagem.$invalid }}">
+                  <option value="" disabled>Escolha uma massagem</option>
+                  <option ng-repeat="massagem in massagens track by massagem.id" value="{{ massagem.id }}">{{ massagem.nome }}</option>
+                </select>
+                <small class="campo-erro" id="erro-massagem" ng-show="formulario.$submitted && formulario.massagem.$invalid">
+                  Selecione uma massagem.
+                </small>
+              </label>
+              <label>
+                <span id="rotulo-data">Data</span>
+                <input type="date" name="data" required min="{{ hoje }}" ng-model="reserva.formulario.data"
+                  ng-change="reserva.atualizarProgresso()" aria-labelledby="rotulo-data" aria-describedby="erro-data"
+                  ng-attr-aria-invalid="{{ formulario.$submitted && formulario.data.$invalid }}">
+                <small class="campo-erro" id="erro-data" ng-show="formulario.$submitted && formulario.data.$invalid">
+                  Escolha a data de hoje ou uma data futura.
+                </small>
+              </label>
+              <label>
+                <span id="rotulo-horario">Horário</span>
+                <select name="horario" required ng-model="reserva.formulario.horario"
+                  ng-change="reserva.atualizarProgresso()"
+                  aria-labelledby="rotulo-horario" aria-describedby="erro-horario"
+                  ng-attr-aria-invalid="{{ formulario.$submitted && formulario.horario.$invalid }}">
+                  <option value="" disabled>Escolha um horário</option>
+                  <option ng-repeat="horario in horarios track by horario" value="{{ horario }}">{{ horario }}</option>
+                </select>
+                <small class="campo-erro" id="erro-horario" ng-show="formulario.$submitted && formulario.horario.$invalid">
+                  Selecione um horário.
+                </small>
+              </label>
+            </div>
+            <button type="submit" class="botao">Simular reserva</button>
+            <p class="nota">Demonstração acadêmica. Nenhum agendamento real é realizado.</p>
+          </form>
+        </div>
+      </section>
+
+      <section id="duvidas" class="secao secao-duvidas" aria-labelledby="titulo-duvidas">
+        <div class="limite duvidas-grade">
+          <div>
+            <h2 id="titulo-duvidas">Antes de chegar</h2>
+          </div>
+          <acordeao itens="perguntas"></acordeao>
+        </div>
+      </section>
+    </main>
+
+    <footer class="rodape">
+      <div class="limite rodape-interno">
+        <p>Projeto acadêmico de desenvolvimento web.</p>
+        <a href="./vue/">Versão Vue.js</a>
+      </div>
+    </footer>
+
+    <toast mensagem="aviso.mensagem" ao-fechar="fecharAviso()"></toast>
+  </body>
+</html>

@@ -1,0 +1,87 @@
+.limite {
+    width: min(1080px, calc(100% - 2.5rem));
+    margin-inline: auto;
+}
+.cabecalho {
+    background: var(--papel);
+    border-bottom: 1px solid var(--linha);
+}
+.cabecalho-interno,
+.rodape-interno {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 1rem;
+}
+.cabecalho-interno {
+    padding-block: 0.8rem;
+}
+
+.marca {
+    font-size: 1.1rem;
+    font-weight: 700;
+    text-decoration: none;
+}
+.navegacao {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 1.25rem;
+}
+.navegacao a {
+    padding-block: 0.5rem;
+    color: var(--texto);
+    font-size: 0.9rem;
+    font-weight: 600;
+    text-decoration: none;
+}
+.navegacao a:hover {
+    text-decoration: underline;
+}
+
+.botao {
+    display: inline-flex;
+    min-height: 47px;
+    align-items: center;
+    justify-content: center;
+    padding: 0.65rem 1.3rem;
+    border: 1px solid transparent;
+    border-radius: 0.25rem;
+    background: var(--verde);
+    color: var(--papel);
+    font-weight: 700;
+    font-size: 0.92rem;
+    text-decoration: none;
+    transition:
+        background-color 0.2s,
+        color 0.2s;
+}
+.botao:hover {
+    background: var(--musgo);
+}
+.botao-compacto {
+    min-height: 42px;
+    padding-inline: 1.05rem;
+}
+.hero {
+    background: #e6eee5;
+    text-align: center;
+}
+.hero-interno {
+    padding-block: clamp(2.5rem, 6vw, 4.5rem);
+}
+.hero p {
+    margin: 0.75rem auto 1.2rem;
+    max-width: 48ch;
+    color: var(--texto);
+}
+
+.secao {
+    padding-block: clamp(2.25rem, 5vw, 3.5rem);
+}
+.cabeca-secao {
+    display: flex;
+    align-items: end;
+    justify-content: space-between;
+    gap: 1.4rem;
+    margin-bottom: 1.75rem;
+}

@@ -1,0 +1,60 @@
+@media (max-width: 880px) {
+    .catalogo {
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+    }
+    .reserva-grade {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (max-width: 660px) {
+    .limite {
+        width: calc(100% - 2rem);
+    }
+    .cabecalho-interno {
+        flex-wrap: wrap;
+        gap: 0.5rem;
+    }
+    .navegacao {
+        order: 1;
+        flex-basis: 100%;
+        gap: 1rem;
+    }
+    .cabeca-secao {
+        align-items: stretch;
+        flex-direction: column;
+    }
+    .dropdown {
+        min-width: 0;
+    }
+    .catalogo,
+    .espaco-grade,
+    .duvidas-grade {
+        grid-template-columns: minmax(0, 1fr);
+    }
+    .espaco-grade,
+    .reserva-grade,
+    .duvidas-grade {
+        gap: 1.25rem;
+    }
+    .rodape-interno {
+        flex-wrap: wrap;
+    }
+}
+
+@media (max-width: 420px) {
+    .formulario-campos {
+        grid-template-columns: minmax(0, 1fr);
+    }
+}
+
+@media (prefers-reduced-motion: reduce) {
+    html {
+        scroll-behavior: auto;
+    }
+    *,
+    *::before,
+    *::after {
+        transition: none !important;
+    }
+}
